@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virtual Art Exhibit: Philippine Masterpieces</title>
+    <meta
+      name="description"
+      content="A virtual museum-style student exhibit featuring Philippine masterpieces from the National Museum of Fine Arts."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        --museum-brown: #5c4033;
+        --museum-cream: #f5f5f0;
+        --museum-ivory: #fcfaf6;
+        --museum-sand: #e7ddd1;
+        --museum-grey: #6b6b6b;
+        --museum-charcoal: #2e2e2e;
+        --museum-line: rgba(92, 64, 51, 0.16);
+        --museum-line-strong: rgba(92, 64, 51, 0.28);
+        --museum-shadow: 0 28px 70px -42px rgba(46, 46, 46, 0.36);
+        --museum-shadow-strong: 0 34px 90px -46px rgba(46, 46, 46, 0.52);
+      }
+
+      html {
+        color-scheme: light;
+      }
+
+      body {
+        font-family: "Manrope", sans-serif;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.68), rgba(245, 245, 240, 0.96)),
+          var(--museum-cream);
+        color: var(--museum-charcoal);
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+
+      img {
+        display: block;
+      }
+
+      main {
+        position: relative;
+        z-index: 1;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      .font-display {
+        font-family: "Cormorant Garamond", serif;
+      }
+
+      .museum-paper {
+        background-color: rgba(255, 255, 255, 0.56);
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.72)),
+          repeating-linear-gradient(
+            0deg,
+            rgba(92, 64, 51, 0.025),
+            rgba(92, 64, 51, 0.025) 1px,
+            transparent 1px,
+            transparent 18px
+          );
+      }
+
+      .museum-backdrop {
+        position: relative;
+        overflow: clip;
+        background-image:
+          radial-gradient(circle at top left, rgba(92, 64, 51, 0.08), transparent 42%),
+          radial-gradient(circle at bottom right, rgba(46, 46, 46, 0.04), transparent 38%);
+      }
+
+      .museum-backdrop::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.42;
+        background-image:
+          radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.56), transparent 28%),
+          radial-gradient(circle at 82% 14%, rgba(92, 64, 51, 0.08), transparent 22%),
+          radial-gradient(circle at 78% 72%, rgba(92, 64, 51, 0.07), transparent 24%);
+      }
+
+      .museum-backdrop::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.05;
+        background-image:
+          repeating-linear-gradient(
+            90deg,
+            rgba(92, 64, 51, 0.08),
+            rgba(92, 64, 51, 0.08) 1px,
+            transparent 1px,
+            transparent 140px
+          );
+      }
+
+      .museum-surface {
+        backdrop-filter: blur(16px);
+      }
+
+      .nav-link {
+        position: relative;
+        transition: color 220ms ease;
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -0.45rem;
+        width: 100%;
+        height: 1px;
+        background: rgba(92, 64, 51, 0.56);
+        opacity: 0;
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 240ms ease, opacity 240ms ease;
+      }
+
+      .nav-link:hover::after,
+      .nav-link.is-active::after {
+        opacity: 1;
+        transform: scaleX(1);
+      }
+
+      .nav-link.is-active {
+        color: var(--museum-brown);
+      }
+
+      .collection-stat {
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.58);
+      }
+
+      .fade-up {
+        opacity: 0;
+        transform: translateY(24px);
+        transition: opacity 700ms ease, transform 700ms ease;
+      }
+
+      .fade-up.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .artwork-card {
+        position: relative;
+        isolation: isolate;
+      }
+
+      .artwork-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        border-radius: inherit;
+        background:
+          linear-gradient(145deg, rgba(255, 255, 255, 0.34), transparent 42%),
+          radial-gradient(circle at top right, rgba(255, 255, 255, 0.18), transparent 30%);
+        opacity: 0;
+        transition: opacity 260ms ease;
+      }
+
+      .artwork-card:hover::before,
+      .artwork-card:focus-within::before {
+        opacity: 1;
+      }
+
+      .artwork-trigger {
+        position: relative;
+        z-index: 1;
+      }
+
+      .artwork-media {
+        position: relative;
+      }
+
+      .artwork-media::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, transparent 50%, rgba(24, 16, 12, 0.2));
+        opacity: 0;
+        transition: opacity 260ms ease;
+        pointer-events: none;
+      }
+
+      .artwork-card:hover .artwork-media::after,
+      .artwork-card:focus-within .artwork-media::after {
+        opacity: 1;
+      }
+
+      .card-arrow {
+        transition: transform 240ms ease, opacity 240ms ease;
+      }
+
+      .artwork-card:hover .card-arrow,
+      .artwork-card:focus-within .card-arrow {
+        transform: translateX(4px);
+        opacity: 1;
+      }
+
+      .reference-table tbody tr {
+        transition: background-color 220ms ease;
+      }
+
+      .reference-table tbody tr:hover {
+        background: rgba(92, 64, 51, 0.045);
+      }
+
+      .reference-link {
+        text-decoration-color: rgba(92, 64, 51, 0.3);
+        text-underline-offset: 0.22rem;
+      }
+
+      .reference-link:hover {
+        color: var(--museum-brown);
+      }
+
+      .reference-type {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        border: 1px solid rgba(92, 64, 51, 0.14);
+        background: rgba(255, 255, 255, 0.76);
+        padding: 0.28rem 0.65rem;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--museum-brown);
+      }
+
+      .modal-panel {
+        transition:
+          opacity 320ms ease,
+          transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .modal-panel.is-open {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .modal-shell {
+        position: relative;
+        overflow: hidden;
+        background:
+          linear-gradient(180deg, rgba(252, 250, 246, 0.98), rgba(245, 245, 240, 0.98)),
+          var(--museum-cream);
+      }
+
+      .modal-shell::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 10rem;
+        pointer-events: none;
+        background:
+          radial-gradient(circle at top left, rgba(255, 255, 255, 0.68), transparent 42%),
+          linear-gradient(180deg, rgba(92, 64, 51, 0.08), transparent);
+      }
+
+      .modal-header {
+        position: relative;
+        z-index: 1;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.52));
+        backdrop-filter: blur(14px);
+      }
+
+      .modal-figure-stage {
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--museum-shadow-strong);
+      }
+
+      .modal-figure-stage::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(circle at top, rgba(255, 255, 255, 0.16), transparent 58%),
+          linear-gradient(180deg, transparent 56%, rgba(18, 12, 9, 0.22));
+      }
+
+      .modal-figure-tag {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        z-index: 1;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        background: rgba(24, 16, 12, 0.26);
+        padding: 0.5rem 0.85rem;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--museum-cream);
+        backdrop-filter: blur(10px);
+      }
+
+      .modal-overview-card,
+      .modal-stat-card,
+      .modal-section-card {
+        position: relative;
+        border: 1px solid rgba(92, 64, 51, 0.14);
+        background: rgba(255, 255, 255, 0.76);
+        box-shadow: 0 22px 48px -38px rgba(46, 46, 46, 0.34);
+      }
+
+      .modal-overview-card::before,
+      .modal-stat-card::before,
+      .modal-section-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+        background:
+          linear-gradient(160deg, rgba(255, 255, 255, 0.28), transparent 34%);
+      }
+
+      .modal-section-card h3 {
+        letter-spacing: 0.01em;
+      }
+
+      @media (min-width: 1024px) {
+        .modal-figure-panel {
+          position: sticky;
+          top: 1.5rem;
+          align-self: start;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-link::after {
+          bottom: -0.25rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition: none !important;
+        }
+
+        .fade-up {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body class="selection:bg-[var(--museum-brown)] selection:text-[var(--museum-cream)]">
+    <div class="museum-backdrop min-h-screen">
+      <header class="sticky top-0 z-40 border-b border-[var(--museum-line)] bg-[rgba(245,245,240,0.86)] backdrop-blur">
+        <div class="mx-auto flex max-w-[72rem] flex-col gap-4 px-6 py-4 md:flex-row md:items-center md:justify-between md:px-10">
+          <a href="#top" class="flex items-center gap-3 text-sm tracking-[0.24em] text-[var(--museum-grey)] uppercase">
+            <span class="inline-block h-9 w-9 rounded-full border border-[var(--museum-line)] bg-white/70"></span>
+            Virtual Art Exhibit
+          </a>
+          <nav aria-label="Primary" class="flex flex-wrap gap-4 text-sm font-medium text-[var(--museum-grey)]">
+            <a class="nav-link" data-nav-link href="#statement">Curatorial Statement</a>
+            <a class="nav-link" data-nav-link href="#gallery">Gallery</a>
+            <a class="nav-link" data-nav-link href="#reflection">Reflection</a>
+            <a class="nav-link" data-nav-link href="#references">References</a>
+          </nav>
+        </div>
+      </header>
+
+      <main id="top">
+        <section class="mx-auto max-w-[68rem] px-6 pb-16 pt-14 md:px-10 lg:pt-20">
+          <div class="fade-up mx-auto flex max-w-[52rem] flex-col items-center space-y-8 text-center">
+            <div class="inline-flex items-center gap-3 rounded-full border border-[var(--museum-line)] bg-white/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-[var(--museum-grey)]">
+              <span class="h-2 w-2 rounded-full bg-[var(--museum-brown)]"></span>
+              Virtual Exhibition
+            </div>
+            <div class="space-y-6">
+              <p class="text-sm font-medium uppercase tracking-[0.28em] text-[var(--museum-brown)]">
+                National Museum of Fine Arts, Philippines
+              </p>
+              <h1 class="mx-auto max-w-4xl text-5xl font-semibold leading-none text-[var(--museum-charcoal)] sm:text-6xl lg:text-7xl">
+                Virtual Art Exhibit: Philippine Masterpieces
+              </h1>
+              <p class="mx-auto max-w-3xl text-lg leading-8 text-[var(--museum-grey)] sm:text-xl">
+                A curated digital exhibit presenting five Philippine artworks that explore colonial conflict, suffering, freedom, patriotism, unity, and nation-building.
+              </p>
+            </div>
+            <div class="grid w-full gap-4 sm:grid-cols-3">
+              <article class="collection-stat museum-surface rounded-[1.4rem] border border-[var(--museum-line)] bg-white/68 p-5 shadow-[var(--museum-shadow)]">
+                <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--museum-grey)]">Collection</p>
+                <p class="mt-3 font-display text-3xl leading-none text-[var(--museum-charcoal)]">5 works</p>
+              </article>
+              <article class="collection-stat museum-surface rounded-[1.4rem] border border-[var(--museum-line)] bg-white/68 p-5 shadow-[var(--museum-shadow)]">
+                <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--museum-grey)]">Timeline</p>
+                <p class="mt-3 font-display text-3xl leading-none text-[var(--museum-charcoal)]">1884-1964</p>
+              </article>
+              <article class="collection-stat museum-surface rounded-[1.4rem] border border-[var(--museum-line)] bg-white/68 p-5 shadow-[var(--museum-shadow)]">
+                <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--museum-grey)]">Venue</p>
+                <p class="mt-3 font-display text-3xl leading-none text-[var(--museum-charcoal)]">Manila</p>
+              </article>
+            </div>
+            <div class="flex flex-col gap-4 sm:flex-row sm:justify-center">
+              <a
+                href="#gallery"
+                class="inline-flex items-center justify-center rounded-full border border-[var(--museum-brown)] bg-[var(--museum-brown)] px-6 py-3 text-sm font-semibold text-[var(--museum-cream)] transition hover:translate-y-[-1px] hover:bg-[#4f372c]"
+              >
+                Explore the Gallery
+              </a>
+              <a
+                href="#statement"
+                class="inline-flex items-center justify-center rounded-full border border-[var(--museum-line)] bg-white/80 px-6 py-3 text-sm font-semibold text-[var(--museum-charcoal)] transition hover:border-[var(--museum-brown)] hover:text-[var(--museum-brown)]"
+              >
+                Read the Curatorial Statement
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section id="statement" class="scroll-mt-24 border-y border-[var(--museum-line)] bg-white/55">
+          <div class="mx-auto grid max-w-[68rem] gap-10 px-6 py-20 md:px-10 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1fr)] lg:gap-14">
+            <div class="fade-up space-y-5">
+              <p class="text-sm font-semibold uppercase tracking-[0.26em] text-[var(--museum-brown)]">Curatorial Statement</p>
+              <h2 class="text-4xl font-semibold leading-tight sm:text-5xl">
+                The exhibit gathers works that move from scenes of violence and oppression to images of freedom, patriotism, unity, and national effort.
+              </h2>
+            </div>
+            <div class="fade-up space-y-6 text-base leading-8 text-[var(--museum-grey)] sm:text-lg">
+              <p>
+                Read together, these works present recurring themes of abuse of power, suffering, resistance, patriotism, cultural pride, and the collective work of building a nation.
+              </p>
+              <p>
+               Each card opens into a detailed view so the full description, subject, meaning, context, analysis, and interpretation can be read without crowding the main gallery.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section id="gallery" class="scroll-mt-24">
+          <div class="mx-auto max-w-[72rem] px-6 py-20 md:px-10">
+            <div class="fade-up mb-12 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+              <div class="max-w-3xl space-y-4">
+                <p class="text-sm font-semibold uppercase tracking-[0.26em] text-[var(--museum-brown)]">Gallery</p>
+                <h2 class="text-4xl font-semibold leading-tight sm:text-5xl">Five artworks, one digital exhibition space.</h2>
+                <p class="text-base leading-8 text-[var(--museum-grey)] sm:text-lg">
+                  Browse the artworks in a bento-style gallery designed to give each image more room based on its composition while keeping the full detail view one click away.
+                </p>
+              </div>
+              <div class="rounded-full border border-[var(--museum-line)] bg-white/76 px-5 py-3 text-sm font-semibold text-[var(--museum-grey)] shadow-[var(--museum-shadow)]">
+                Select any artwork to view details
+              </div>
+            </div>
+
+            <div id="gallery-grid" class="grid items-start gap-6 md:grid-cols-2 lg:grid-cols-6"></div>
+          </div>
+        </section>
+
+        <section id="reflection" class="scroll-mt-24 border-y border-[var(--museum-line)] bg-white/55">
+          <div class="mx-auto max-w-[68rem] px-6 py-20 md:px-10">
+            <div class="fade-up max-w-3xl space-y-4">
+              <p class="text-sm font-semibold uppercase tracking-[0.26em] text-[var(--museum-brown)]">Reflection</p>
+              <h2 class="text-4xl font-semibold leading-tight sm:text-5xl">Shared ideas across the collection</h2>
+              <p class="text-base leading-8 text-[var(--museum-grey)] sm:text-lg">
+                Together, the artworks trace themes of colonial conflict, oppression, resistance, patriotism, unity, and national pride. They present Philippine history as a story shaped by struggle, sacrifice, and collective effort.
+              </p>
+            </div>
+
+            <div class="mt-12 grid gap-6 lg:grid-cols-3">
+              <article class="fade-up museum-surface flex h-full flex-col rounded-[1.75rem] border border-[var(--museum-line)] bg-[rgba(245,245,240,0.82)] p-7 shadow-[var(--museum-shadow)]">
+                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--museum-grey)]">01</p>
+                <p class="mt-4 text-sm font-semibold uppercase tracking-[0.22em] text-[var(--museum-brown)]">Conflict</p>
+                <h3 class="mt-3 text-3xl font-semibold">History shown through struggle</h3>
+                <p class="mt-4 text-sm leading-7 text-[var(--museum-grey)]">
+                  Several works focus on violence, oppression, and instability, showing how conflict becomes part of historical memory and public meaning.
+                </p>
+              </article>
+              <article class="fade-up museum-surface flex h-full flex-col rounded-[1.75rem] border border-[var(--museum-line)] bg-[rgba(245,245,240,0.82)] p-7 shadow-[var(--museum-shadow)]">
+                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--museum-grey)]">02</p>
+                <p class="mt-4 text-sm font-semibold uppercase tracking-[0.22em] text-[var(--museum-brown)]">Resistance</p>
+                <h3 class="mt-3 text-3xl font-semibold">Freedom as a collective pursuit</h3>
+                <p class="mt-4 text-sm leading-7 text-[var(--museum-grey)]">
+                  The collection repeatedly points to resistance, courage, and patriotism, suggesting that freedom is achieved through shared effort rather than individual action alone.
+                </p>
+              </article>
+              <article class="fade-up museum-surface flex h-full flex-col rounded-[1.75rem] border border-[var(--museum-line)] bg-[rgba(245,245,240,0.82)] p-7 shadow-[var(--museum-shadow)]">
+                <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--museum-grey)]">03</p>
+                <p class="mt-4 text-sm font-semibold uppercase tracking-[0.22em] text-[var(--museum-brown)]">Nation-Building</p>
+                <h3 class="mt-3 text-3xl font-semibold">Unity as a recurring image</h3>
+                <p class="mt-4 text-sm leading-7 text-[var(--museum-grey)]">
+                  The works also emphasize unity, bayanihan, and national pride, presenting the nation as something built and defended through cooperation.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="references" class="scroll-mt-24">
+          <div class="mx-auto max-w-[70rem] px-6 py-20 md:px-10">
+            <div class="fade-up mb-12 max-w-3xl space-y-4">
+              <p class="text-sm font-semibold uppercase tracking-[0.26em] text-[var(--museum-brown)]">References</p>
+              <h2 class="text-4xl font-semibold leading-tight sm:text-5xl">Sources and citations for each artwork</h2>
+              <p class="text-base leading-8 text-[var(--museum-grey)] sm:text-lg">
+                This section gathers museum sources, historical references, and related materials for each work in the exhibit.
+              </p>
+            </div>
+
+            <div id="references-grid" class="grid gap-6 lg:grid-cols-2"></div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="border-t border-[var(--museum-line)] bg-[rgba(255,255,255,0.55)]">
+        <div class="mx-auto flex max-w-[72rem] flex-col gap-3 px-6 py-8 text-sm text-[var(--museum-grey)] md:flex-row md:items-center md:justify-between md:px-10">
+          <p>Virtual Art Exhibit: Philippine Masterpieces</p>
+          <p>ART 002: Art Appreciation.</p>
+        </div>
+      </footer>
+    </div>
+
+    <div
+      id="artwork-modal"
+      class="fixed inset-0 z-50 hidden items-start justify-center overflow-y-auto bg-[rgba(35,24,18,0.78)] px-4 py-6 backdrop-blur-[6px] sm:px-6 sm:py-10"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+      aria-labelledby="modal-title"
+    >
+      <div class="modal-panel w-full max-w-[66rem] translate-y-8 opacity-0">
+        <div class="modal-shell rounded-[2.15rem] border border-[var(--museum-line)] shadow-[0_38px_90px_-34px_rgba(0,0,0,0.55)]">
+          <div class="modal-header flex items-center justify-between border-b border-[var(--museum-line)] px-5 py-4 sm:px-8">
+            <p class="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--museum-brown)]">Artwork Record</p>
+            <button
+              id="modal-close"
+              type="button"
+              class="inline-flex items-center justify-center rounded-full border border-[var(--museum-line)] bg-white/90 px-4 py-2 text-sm font-semibold text-[var(--museum-charcoal)] transition hover:border-[var(--museum-brown)] hover:bg-white hover:text-[var(--museum-brown)]"
+            >
+              Close
+            </button>
+          </div>
+          <div class="grid lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1fr)]">
+            <div class="modal-figure-panel border-b border-[var(--museum-line)] bg-white/48 p-5 lg:border-b-0 lg:border-r lg:p-8">
+              <div class="modal-figure-stage flex min-h-[20rem] items-center justify-center rounded-[1.6rem] border border-[rgba(92,64,51,0.14)] bg-[linear-gradient(180deg,rgba(37,26,20,0.97),rgba(87,63,49,0.94))] p-4 sm:min-h-[28rem]">
+                <img
+                  id="modal-image"
+                  src=""
+                  alt=""
+                  class="relative z-10 max-h-[68vh] w-full object-contain drop-shadow-[0_22px_36px_rgba(0,0,0,0.38)]"
+                />
+              </div>
+            </div>
+            <div class="p-5 sm:p-8 lg:p-10">
+              <div class="modal-overview-card rounded-[1.6rem] p-6 sm:p-7">
+                <div class="mb-5 flex flex-wrap gap-3">
+                  <span id="modal-year" class="rounded-full border border-[var(--museum-line)] bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--museum-grey)]"></span>
+                  <span id="modal-medium" class="rounded-full border border-[var(--museum-line)] bg-white/80 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--museum-grey)]"></span>
+                </div>
+                <h2 id="modal-title" class="text-4xl font-semibold leading-tight sm:text-5xl"></h2>
+                <p id="modal-artist" class="mt-3 text-lg leading-8 text-[var(--museum-grey)]"></p>
+              </div>
+
+              <div class="mt-5 grid gap-4 sm:grid-cols-2">
+                <div class="modal-stat-card rounded-[1.4rem] p-5">
+                  <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--museum-brown)]">Location</p>
+                  <p id="modal-location" class="mt-3 text-sm leading-7 text-[var(--museum-grey)]"></p>
+                </div>
+                <div class="modal-stat-card rounded-[1.4rem] p-5">
+                  <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--museum-brown)]">Dimensions</p>
+                  <p id="modal-dimensions" class="mt-3 text-sm leading-7 text-[var(--museum-grey)]"></p>
+                </div>
+              </div>
+
+              <div class="mt-5 grid gap-4 sm:grid-cols-2">
+                <section class="modal-section-card rounded-[1.4rem] p-5">
+                  <h3 class="text-2xl font-semibold">Description</h3>
+                  <p id="modal-description" class="mt-2 text-sm leading-7 text-[var(--museum-grey)]"></p>
+                </section>
+                <section class="modal-section-card rounded-[1.4rem] p-5">
+                  <h3 class="text-2xl font-semibold">Subject</h3>
+                  <p id="modal-subject" class="mt-2 text-sm leading-7 text-[var(--museum-grey)]"></p>
+                </section>
+                <section class="modal-section-card rounded-[1.4rem] p-5">
+                  <h3 class="text-2xl font-semibold">Meaning</h3>
+                  <p id="modal-meaning" class="mt-2 text-sm leading-7 text-[var(--museum-grey)]"></p>
+                </section>
+                <section class="modal-section-card rounded-[1.4rem] p-5">
+                  <h3 class="text-2xl font-semibold">Context</h3>
+                  <p id="modal-context" class="mt-2 text-sm leading-7 text-[var(--museum-grey)]"></p>
+                </section>
+                <section class="modal-section-card rounded-[1.4rem] p-5">
+                  <h3 class="text-2xl font-semibold">Analysis</h3>
+                  <p id="modal-analysis" class="mt-2 text-sm leading-7 text-[var(--museum-grey)]"></p>
+                </section>
+                <section class="modal-section-card rounded-[1.4rem] p-5">
+                  <h3 class="text-2xl font-semibold">Significance</h3>
+                  <p id="modal-interpretation" class="mt-2 text-sm leading-7 text-[var(--museum-grey)]"></p>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>
