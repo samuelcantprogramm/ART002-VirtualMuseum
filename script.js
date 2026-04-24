@@ -1,31 +1,81 @@
+const researchPartners = [
+  {
+    name: "National Museum of the Philippines",
+    role: "Museum records",
+    description:
+      "Used for official gallery pages, artwork location, museum publications, and collection notes.",
+  },
+  {
+    name: "National Commission for Culture and the Arts",
+    role: "Context essays",
+    description:
+      "Used for historical interpretation, National Artist references, and broader art-historical framing.",
+  },
+  {
+    name: "Cultural Center of the Philippines",
+    role: "Art encyclopedia",
+    description:
+      "Used for the CCP Encyclopedia of Philippine Art entry on Botong Francisco's mural.",
+  },
+  {
+    name: "National Library of the Philippines",
+    role: "Object history",
+    description:
+      "Used for the public history of Juan Luna's Bandera Filipina and its significance as a flag image.",
+  },
+  {
+    name: "National Historical Commission of the Philippines",
+    role: "Historical context",
+    description:
+      "Used for the political context of the flag image and the 1899 struggle for independence.",
+  },
+];
+
 const artworks = [
   {
     id: 1,
     title:
-      "The Assassination of Governor-General Bustamante (La muerte del Gobernador Bustamante)",
+      "The Assassination of Governor Bustamante (El Asesinato del Gobernador Bustamante)",
     artist: "Felix Resurreccion Hidalgo",
-    year: "1884",
+    year: "Undated",
+    sortYear: 1884,
     medium: "Oil on canvas",
-    dimensions: "~4.12 m x 3.38 m",
+    dimensions: "420.4 x 353.1 cm",
     location: "National Museum of Fine Arts, Manila",
     image: "./The Assassination of Governor.webp",
-    cardClass: "md:col-span-1 lg:col-span-3",
-    frameClass: "min-h-[16rem] md:min-h-[18rem] xl:min-h-[20rem]",
+    cardClass: "gallery-span-3",
+    frameClass: "artwork-frame--hero",
+    theme: "Colonial violence",
+    timelineNote:
+      "The exhibit opens with a scene where colonial authority collapses into violence.",
+    cardSummary:
+      "Hidalgo turns a notorious colonial killing into a dramatic warning about abusive power.",
     description:
-      "Dark, earthy tones such as browns, blacks, and ochres are contrasted with striking red accents. The composition feels angular and chaotic, with friars, soldiers, religious banners, and weapons filling the interior of the Palacio del Gobernador. The overall look is dramatic, intense, and full of movement.",
+      "Inside the Palacio del Gobernador, friars, soldiers, banners, and blades crowd the stairway while the governor's body collapses at the center of the unrest.",
     subject:
-      "Depicts the violent assassination of Governor-General Bustamante in 1719.",
+      "A historical reconstruction of the 1719 killing of Governor-General Fernando Manuel de Bustamante during a clash involving colonial officials and friars.",
     meaning:
-      "Critiques clerical abuse of power and highlights the conflict between church and state. It conveys chaos, fear, and betrayal.",
+      "The work does more than narrate an event. It presents colonial rule as unstable and morally damaged, suggesting that authority loses legitimacy when power turns violent and self-serving.",
     context:
-      "Reflects Spanish colonial tensions and is linked to the reformist ideas of the Propaganda Movement. Hidalgo gained international recognition in Europe.",
+      "The National Museum publication lists the work as El Asesinato del Gobernador Bustamante, also known as La Iglesia Contra el Estado. The painting revisits a colonial episode that later Filipino reformists understood as a sign of conflict between civil government and clerical influence.",
     analysis:
-      "Uses strong chiaroscuro, diagonal movement, asymmetrical balance, and strong emphasis on the central act of violence.",
-    interpretation:
-      "A powerful historical artwork that exposes colonial injustice.",
+      "Hidalgo compresses the action into a narrow interior so the viewer feels trapped in the same burst of violence. Diagonal movement, sharp highlights, and red accents force attention toward the fatal center of the scene.",
+    curatorNote:
+      "I placed this first because it introduces the exhibit through the problem of colonial power itself. The later works answer that violence with grief, resistance, memory, and collective ideals.",
     references: [
-      "National Museum of Fine Arts, Philippines",
-      "General Philippine art history sources on Felix Hidalgo",
+      {
+        title:
+          "National Museum of the Philippines, Treasures of Philippine Art: El Asesinato del Gobernador Bustamante",
+        href: "https://www.nationalmuseum.gov.ph/wp-content/uploads/2021/09/El-Asesinato-del-Gobernador-Bustamante-by-Felix-Resurreccion-Hidalgo.pdf",
+        type: "Museum book",
+        note: "Used for the official title, alternate title, medium, size, and conservation notes.",
+      },
+      {
+        title: "National Museum Publications",
+        href: "https://www.nationalmuseum.gov.ph/publications/",
+        type: "Museum",
+        note: "Confirms the museum publication used in the artwork record.",
+      },
     ],
   },
   {
@@ -33,129 +83,221 @@ const artworks = [
     title: "Spoliarium",
     artist: "Juan Luna",
     year: "1884",
+    sortYear: 1884,
     medium: "Oil on canvas",
-    dimensions: "4.22 m x 7.675 m",
-    location: "National Museum of Fine Arts, Manila",
+    dimensions: "approximately 426 x 772 cm",
+    location: "Spoliarium Hall, National Museum of Fine Arts, Manila",
     image: "./spoliarium.webp",
-    cardClass: "md:col-span-1 lg:col-span-3",
-    frameClass: "min-h-[16rem] md:min-h-[18rem] xl:min-h-[20rem]",
+    cardClass: "gallery-span-3",
+    frameClass: "artwork-frame--hero",
+    theme: "Public suffering",
+    timelineNote:
+      "A Roman arena becomes an allegory for humiliation, grief, and oppression.",
+    cardSummary:
+      "Luna uses a Roman subject to turn humiliation, grief, and oppression into a nationalist allegory.",
     description:
-      "Dark tones of black, brown, and red dominate the canvas. Dead gladiators are dragged across the arena with strong contrasts of light and shadow heightening the drama.",
-    subject: "The aftermath of a gladiatorial fight in ancient Rome.",
+      "Dead gladiators are dragged into the spoliarium while grieving figures linger in the shadows and a band of light falls across the broken bodies.",
+    subject:
+      "The aftermath of gladiatorial combat in ancient Rome, specifically the place where the fallen are stripped after the spectacle.",
     meaning:
-      "Symbolizes oppression and injustice and is often read as an allegory of Filipino suffering under colonization. It evokes grief, brutality, and helplessness.",
+      "Although the scene is Roman, Filipino readers associated the dragged bodies with colonial subjugation. The painting transforms public spectacle into a meditation on how empire dehumanizes the defeated.",
     context:
-      "Won a Gold Medal in Spain in 1884, was celebrated by Jose Rizal, and became a nationalist symbol.",
+      "Painted in Rome and completed in 1884, the monumental canvas won the top gold medal at the Exposicion Nacional de Bellas Artes in Madrid. Rizal and other reformists read it as proof that Filipino talent and political feeling could command international attention.",
     analysis:
-      "Uses a dark dramatic palette, diagonal flow, realistic texture, and strong emphasis on the fallen gladiators.",
-    interpretation:
-      "A masterpiece symbolizing Filipino identity and resistance.",
+      "The huge scale, procession-like diagonal, and concentrated highlights on the corpses direct the eye toward suffering rather than victory. Luna's earth reds, black shadows, and muscular brushwork make the canvas feel ceremonial, heavy, and tragic.",
+    curatorNote:
+      "I treat Spoliarium as the emotional center of the exhibit because it converts pain into public meaning. It deepens the story from colonial violence into the felt experience of humiliation and sacrifice.",
     references: [
-      "https://en.wikipedia.org/wiki/Spoliarium",
-      "https://www.nationalmuseum.gov.ph/our-museums/national-museum-of-fine-arts",
-      "Alcantara, P. A. (1959). Juan Luna and the Spoliarium",
-      "https://repository.cpu.edu.ph/handle/20.500.12852/3064",
-      "https://ncca.gov.ph/about-culture-and-arts/in-focus/suffering-colonialism-modernity-as-sacrifice-and-salvation-in-philippine-colonial-painting/",
-      "https://www.youtube.com/watch?v=Wy99w1BP_sE",
+      {
+        title: "Spoliarium Hall, National Museum of the Philippines",
+        href: "https://www.nationalmuseum.gov.ph/exhibitions/fine-arts/gallery-spoliarium-hall/",
+        type: "Museum",
+        note: "Used for the current museum location and exhibition context.",
+      },
+      {
+        title: "NCCA In Focus: The Art of Juan Luna",
+        href: "https://ncca.gov.ph/about-culture-and-arts/in-focus/the-art-of-juan-luna/",
+        type: "Agency",
+        note: "Used for the artwork's scale, 1884 Madrid success, and nationalist reading.",
+      },
+      {
+        title:
+          "NCCA In Focus: Suffering Colonialism: Modernity as Sacrifice and Salvation in Philippine Colonial Painting",
+        href: "https://ncca.gov.ph/about-culture-and-arts/in-focus/suffering-colonialism-modernity-as-sacrifice-and-salvation-in-philippine-colonial-painting/",
+        type: "Agency",
+        note: "Used for the allegorical reading of suffering and colonial oppression.",
+      },
     ],
   },
   {
     id: 3,
-    title: "Filipino Struggles Through History",
-    artist: 'Carlos "Botong" Francisco',
-    year: "1964",
-    medium: "Oil on canvas",
-    dimensions: "2.7 m x 8 m",
-    location: "National Museum of Fine Arts, Manila",
-    image: "./Filipino Struggles through History.webp",
-    cardClass: "md:col-span-2 lg:col-span-2",
-    frameClass: "min-h-[11rem] md:min-h-[12rem] lg:min-h-[13rem]",
-    imageClass:
-      "mx-auto max-w-[13rem] sm:max-w-[15rem] lg:max-w-[14rem]",
+    title: "Souvenir de 1899 (Bandera Filipina)",
+    artist: "Juan Luna",
+    year: "1899",
+    sortYear: 1899,
+    medium: "Watercolor on paper",
+    dimensions: "Not specified in the cited museum pages",
+    location:
+      "National Museum of Fine Arts, Manila (loan from the National Library of the Philippines)",
+    image: "./Souvenirde1999.webp",
+    cardClass: "gallery-span-2",
+    frameClass: "artwork-frame--standard",
+    theme: "Resistance and symbol",
+    timelineNote:
+      "The flag becomes the exhibit's clearest image of defiance and hope.",
+    cardSummary:
+      "A flag, distant smoke, and a faint American banner compress war, hope, and defiance into one image.",
     description:
-      "Warm tones of red, orange, and yellow combine with strong figures and flowing lines. The mural presents scenes of revolution in a continuous and energetic narrative.",
+      "The Philippine flag flies brightly in the foreground while smoke, a river, and a distant town under attack sit farther back in the composition.",
     subject:
-      "Shows the Filipino struggle for freedom, highlighting Bonifacio and the Katipuneros.",
+      "An image of the Philippine flag during the Philippine-American War, now widely known as Souvenir de 1899 or Bandera Filipina.",
     meaning:
-      "Emphasizes unity and collective struggle. It conveys courage, urgency, and patriotism.",
+      "Luna uses the flag as more than decoration. It becomes the emotional center of the painting, making patriotism visible even while the background suggests destruction and foreign aggression.",
     context:
-      "It was commissioned for Manila City Hall during the post-war cultural revival, and Botong Francisco helped revive mural art in the Philippines.",
+      "The National Museum notes that Luna gave the watercolor to Ferdinand Blumentritt during his visit to Litomerice. NHCP identifies the work as a May 21, 1899 sketch created amid efforts to draw international attention to the Filipino struggle for independence.",
     analysis:
-      "Uses bold color, rhythmic line, continuous narrative movement, and well-distributed balance.",
-    interpretation:
-      "Preserves Filipino history and identity.",
+      "The painting relies on contrast: a clear, wind-filled flag in front, smoke and conflict behind. Because the scene is spare, the symbol reads immediately and the political message becomes concentrated rather than crowded.",
+    curatorNote:
+      "I placed this after Spoliarium because it shifts the exhibit from suffering to resistance. The flag works as a visual answer to oppression, turning grief into a declaration of nationhood.",
     references: [
-      "National Museum of Fine Arts, Philippines",
-      'Historical records on Carlos "Botong" Francisco',
+      {
+        title: "NMP Welcomes Blumentritt Kin",
+        href: "https://www.nationalmuseum.gov.ph/2025/02/04/nmp-welcomes-blumentritt-kin/",
+        type: "Museum",
+        note: "Used for the work's current display status and its history as Luna's gift to Blumentritt.",
+      },
+      {
+        title:
+          "National Library of the Philippines: 127th National Flag Day ft. Juan Luna's Bandera Filipina",
+        href: "https://web.nlp.gov.ph/127th-national-flag-day-ft-juan-lunas-bandera-filipina/",
+        type: "Library",
+        note: "Used for the work's public history as a flag image and its continuing national symbolism.",
+      },
+      {
+        title: "NHCP: The Aguinaldo Shrine's Williams-Dubois Flag",
+        href: "https://nhcp.gov.ph/articles/the-aguinaldo-shrines-williams-dubois-flag/",
+        type: "Agency",
+        note: "Used for the 1899 date, political context, and visual reading of the background conflict.",
+      },
     ],
   },
   {
     id: 4,
-    title: "Souvenir de 1899",
-    artist: "Juan Luna",
-    year: "1899",
-    medium: "Watercolor on paper",
-    dimensions: "Not specified",
-    location: "National Museum of the Philippines",
-    image: "./Souvenirde1999.webp",
-    cardClass: "md:col-span-1 lg:col-span-2",
-    frameClass: "min-h-[14rem] md:min-h-[15rem] lg:min-h-[16rem]",
+    title: "Commonwealth Triumphal Arch",
+    artist: "Guillermo E. Tolentino",
+    year: "Commonwealth era",
+    sortYear: 1935,
+    medium: "Plaster maquette",
+    dimensions: "Not specified in the cited museum records",
+    location: "National Museum of Fine Arts, Manila",
+    image: "./Commonwealth Triumphant Arch.webp",
+    cardClass: "gallery-span-2",
+    frameClass: "artwork-frame--standard",
+    theme: "Nation-building",
+    timelineNote:
+      "The story turns from resistance toward the difficult task of building a republic.",
+    cardSummary:
+      "Tolentino imagines independence as a shared act of carrying the nation forward together.",
     description:
-      "The Philippine flag flies prominently while a town burns in the background, creating a sharp contrast between national hope and wartime destruction.",
+      "Human figures support an arch like a collective structure in motion, combining classical monumentality with the familiar rhythm of bayanihan.",
     subject:
-      "The first artistic depiction of the Philippine flag during the Philippine-American War.",
+      "A model for a proposed Commonwealth monument that represents Filipinos physically carrying the future of the nation.",
     meaning:
-      "Symbolizes nationalism and resistance, while also representing hope and pride.",
+      "The work turns nationhood into cooperation. Rather than centering one hero, it imagines the republic as something upheld by many regions, peoples, and bodies working together.",
     context:
-      "Painted in Bohemia and reflects the political struggle of 1899.",
+      "NCCA records the piece as a plaster work by National Artist Guillermo Tolentino, while museum reports list a model of the Commonwealth Triumphal Arch in the National Museum collection. TFAM's discussion of Tolentino explains that the design drew on bayanihan and the festival arch as symbols of a semi-independent government moving toward a republic.",
     analysis:
-      "Uses bright-versus-muted color contrast, centered balance, and clear emphasis on the flag.",
-    interpretation:
-      "Represents Filipino identity during war.",
+      "Tolentino balances the solidity of the arch with the strain of the supporting figures, creating tension between monument and movement. The design merges classical public sculpture with folk imagery so political aspiration feels both official and local.",
+    curatorNote:
+      "This piece belongs near the end of the exhibit because it changes the language of the story. Instead of showing violence or grief, it imagines freedom as organized cooperation and shared labor.",
     references: [
-      "National Museum of the Philippines",
-      "Historical accounts of Juan Luna",
+      {
+        title: "NCCA Talapamana: Works of National Artists - Visual Arts",
+        href: "https://talapamana.ncca.gov.ph/index.php/component/content/article/works-of-national-artists-visual-arts?Itemid=101&catid=13",
+        type: "Agency",
+        note: "Used for the title, medium, and attribution to Guillermo Tolentino.",
+      },
+      {
+        title: "TFAM Journal of No. 35",
+        href: "https://www.tfam.museum/journal/Detail.aspx?aID=25&ddlLang=en-us&id=35",
+        type: "Journal",
+        note: "Used for Tolentino's explanation of the design as bayanihan and a transition toward the republic.",
+      },
+      {
+        title: "National Museum Annual Report 2016",
+        href: "https://www.nationalmuseum.gov.ph/wp-content/uploads/2021/07/2.-NM-AR-2016-pdf-final.pdf",
+        type: "Museum report",
+        note: "Used to confirm that a model of the Commonwealth Triumphal Arch is listed in the museum's holdings.",
+      },
     ],
   },
   {
     id: 5,
-    title: "Commonwealth Triumphant Arch",
-    artist: "Guillermo Estrella Tolentino",
-    year: "c. 1935-1938",
-    medium: "Bronze, marble (maquette)",
-    dimensions: "Maquette model; exact dimensions not specified",
-    location: "National Museum of Fine Arts, Manila",
-    image: "./Commonwealth Triumphant Arch.webp",
-    cardClass: "md:col-span-1 lg:col-span-2",
-    frameClass: "min-h-[14rem] md:min-h-[15rem] lg:min-h-[16rem]",
+    title: "Filipino Struggles Through History",
+    artist: 'Carlos "Botong" Francisco',
+    year: "1964",
+    sortYear: 1964,
+    medium: "Oil on canvas mural",
+    dimensions: "271 x 2,000 cm",
+    location: "Old Senate Session Hall, National Museum of Fine Arts, Manila",
+    image: "./Filipino Struggles through History.webp",
+    cardClass: "gallery-span-2",
+    frameClass: "artwork-frame--wide",
+    imageClass: "artwork-image--mural",
+    theme: "Historical memory",
+    timelineNote:
+      "Botong closes the sequence by turning many struggles into one public memory.",
+    cardSummary:
+      "Botong Francisco stitches many struggles into one public mural so national history reads as a collective achievement.",
     description:
-      'Figures carry an arch labeled "1935" in a realistic yet carefully structured design, emphasizing cooperation and collective effort.',
-    subject: "Shows Filipinos working together to build a nation.",
+      "The mural strings together heroes, crowds, battles, and civic episodes in a long, rhythmic panorama driven by warm colors and sweeping outlines.",
+    subject:
+      "A monumental visual narrative of Philippine history, from early communities and colonial rule to revolution, occupation, and postwar recovery.",
     meaning:
-      "Represents unity, bayanihan, and hope for independence. It conveys pride and determination.",
+      "The mural argues that national identity is cumulative. No single figure carries the whole story; instead, history is built from many linked struggles remembered in public.",
     context:
-      "Created during the Commonwealth era, but the larger project was halted by World War II.",
+      "The National Museum's Old Senate Session Hall identifies the work as a major commission for Manila City Hall. CCP notes that Francisco received the 1964 commission to create a historical mural for the Bulwagang Katipunan, while NCCA records the work as a National Cultural Treasure.",
     analysis:
-      "Uses symmetrical balance, contrast between the human figures and the structure, and movement through shared effort.",
-    interpretation:
-      "A symbol of national unity and progress.",
+      "Francisco uses flowing contours, repeated clusters of figures, and a dense sequence of episodes to keep the eye moving. The mural's narrative continuity makes history feel alive, crowded, and communal rather than distant.",
+    curatorNote:
+      "I close the exhibit with this mural because it gathers earlier themes into one act of remembrance. It shows that colonial conflict, resistance, and nation-building survive when art turns them into shared memory.",
     references: [
-      "National Museum of Fine Arts, Philippines",
-      "Historical documentation on Guillermo Tolentino",
+      {
+        title: "National Museum: Senate Hall",
+        href: "https://www.nationalmuseum.gov.ph/exhibitions/fine-arts/gallery-senate-hall/",
+        type: "Museum",
+        note: "Used for the current museum location and commission history connected to Manila City Hall.",
+      },
+      {
+        title: "CCP Encyclopedia of Philippine Art: Filipino Struggles Through History",
+        href: "https://epa.culturalcenter.gov.ph/3/82/2182/",
+        type: "Encyclopedia",
+        note: "Used for the mural's 1964 date, subject coverage, and public narrative purpose.",
+      },
+      {
+        title: "NCCA Talapamana: Works of National Artists - Visual Arts",
+        href: "https://talapamana.ncca.gov.ph/index.php/component/content/article/works-of-national-artists-visual-arts?Itemid=101&catid=13",
+        type: "Agency",
+        note: "Used for the listed dimensions and National Cultural Treasure record.",
+      },
     ],
   },
 ];
 
 const galleryGrid = document.querySelector("#gallery-grid");
+const timelineGrid = document.querySelector("#timeline-grid");
+const researchPillGrid = document.querySelector("#research-pill-grid");
 const referencesGrid = document.querySelector("#references-grid");
 const modal = document.querySelector("#artwork-modal");
 const modalPanel = modal.querySelector(".modal-panel");
 const closeButton = document.querySelector("#modal-close");
 const modalImage = document.querySelector("#modal-image");
+const modalStage = document.querySelector("#modal-stage");
 const modalTitle = document.querySelector("#modal-title");
 const modalArtist = document.querySelector("#modal-artist");
 const modalYear = document.querySelector("#modal-year");
 const modalMedium = document.querySelector("#modal-medium");
+const modalSourceCount = document.querySelector("#modal-source-count");
 const modalLocation = document.querySelector("#modal-location");
 const modalDimensions = document.querySelector("#modal-dimensions");
 const modalDescription = document.querySelector("#modal-description");
@@ -163,8 +305,18 @@ const modalSubject = document.querySelector("#modal-subject");
 const modalMeaning = document.querySelector("#modal-meaning");
 const modalContext = document.querySelector("#modal-context");
 const modalAnalysis = document.querySelector("#modal-analysis");
-const modalInterpretation = document.querySelector("#modal-interpretation");
+const modalCuratorNote = document.querySelector("#modal-curator-note");
+const navToggle = document.querySelector("#nav-toggle");
+const siteNav = document.querySelector("#site-nav");
 const navLinks = Array.from(document.querySelectorAll("[data-nav-link]"));
+const heroWorkCount = document.querySelector("#hero-work-count");
+const heroTimeline = document.querySelector("#hero-timeline");
+const heroSourceCount = document.querySelector("#hero-source-count");
+const researchWorkCount = document.querySelector("#research-work-count");
+const researchSourceCount = document.querySelector("#research-source-count");
+const researchInstitutionCount = document.querySelector(
+  "#research-institution-count"
+);
 
 let lastFocusedCard = null;
 
@@ -180,69 +332,95 @@ function getArtworkImageClass(artwork) {
   return artwork.imageClass || "";
 }
 
-function getPreviewText(text, maxLength = 150) {
-  if (!text) {
-    return "View artwork notes, context, and analysis.";
-  }
-
-  return text.length > maxLength
-    ? `${text.slice(0, maxLength - 3)}...`
-    : text;
-}
-
 function getArtworkNumber(id) {
   return String(id).padStart(2, "0");
 }
 
+function getSourceCount() {
+  return artworks.reduce((total, artwork) => total + artwork.references.length, 0);
+}
+
+function getTimelineRange() {
+  const years = artworks.map((artwork) => artwork.sortYear);
+  return `${Math.min(...years)}-${Math.max(...years)}`;
+}
+
+function getSourceLabel(count) {
+  return `${count} source${count === 1 ? "" : "s"}`;
+}
+
+function closeNavigation() {
+  if (!navToggle || !siteNav) {
+    return;
+  }
+
+  navToggle.setAttribute("aria-expanded", "false");
+  siteNav.classList.remove("is-open");
+}
+
+function setupNavigation() {
+  if (!navToggle || !siteNav) {
+    return;
+  }
+
+  navToggle.addEventListener("click", () => {
+    const willOpen = !siteNav.classList.contains("is-open");
+    siteNav.classList.toggle("is-open", willOpen);
+    navToggle.setAttribute("aria-expanded", String(willOpen));
+  });
+
+  navLinks.forEach((link) => {
+    link.addEventListener("click", closeNavigation);
+  });
+
+  window.addEventListener("resize", () => {
+    if (window.innerWidth >= 900) {
+      closeNavigation();
+    }
+  });
+}
+
 function createArtworkCard(artwork) {
   const article = document.createElement("article");
-  article.className = `fade-up artwork-card self-start ${artwork.cardClass}`;
+  article.className = `fade-up artwork-card ${artwork.cardClass}`;
 
   const button = document.createElement("button");
   button.type = "button";
-  button.className =
-    "artwork-trigger group block w-full overflow-hidden rounded-[1.85rem] border border-[rgba(92,64,51,0.16)] bg-[rgba(255,255,255,0.82)] text-left shadow-[var(--museum-shadow)] transition duration-300 hover:translate-y-[-4px] hover:shadow-[var(--museum-shadow-strong)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--museum-brown)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--museum-cream)]";
+  button.className = "artwork-button";
   button.dataset.artworkId = artwork.id;
   button.setAttribute("aria-haspopup", "dialog");
   button.innerHTML = `
-    <div class="flex flex-col">
-      <div class="artwork-media relative flex ${artwork.frameClass} items-center justify-center overflow-hidden border-b border-[rgba(92,64,51,0.16)] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.16),transparent_58%),linear-gradient(180deg,rgba(37,26,20,0.95),rgba(87,63,49,0.94))]">
-        <div class="absolute inset-x-0 top-0 z-20 flex items-start justify-between p-4 sm:p-5">
-          <span class="rounded-full border border-[rgba(255,255,255,0.18)] bg-[rgba(255,255,255,0.12)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--museum-cream)] backdrop-blur-sm">
-            ${getArtworkNumber(artwork.id)}
-          </span>
-          <span class="rounded-full border border-[rgba(255,255,255,0.18)] bg-[rgba(24,16,12,0.22)] px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--museum-cream)] backdrop-blur-sm">
-            View
-          </span>
-        </div>
-        <img
-          src="${getArtworkImage(artwork)}"
-          alt="${getArtworkAlt(artwork)}"
-          loading="lazy"
-          decoding="async"
-          class="relative z-10 h-full w-full object-contain p-4 transition duration-500 group-hover:scale-[1.03] sm:p-5 ${getArtworkImageClass(
-            artwork
-          )}"
-        />
+    <div class="artwork-media ${artwork.frameClass}">
+      <div class="artwork-badge-row">
+        <span class="artwork-pill artwork-pill--light">${getArtworkNumber(artwork.id)}</span>
+        <span class="artwork-pill artwork-pill--dark">${artwork.theme}</span>
       </div>
-      <div class="flex flex-col gap-5 p-6 sm:p-7">
-        <div class="flex flex-wrap gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--museum-grey)]">
-          <span class="rounded-full border border-[rgba(92,64,51,0.16)] bg-white px-3 py-1">${artwork.year}</span>
-          <span class="rounded-full border border-[rgba(92,64,51,0.16)] bg-white px-3 py-1">${artwork.medium}</span>
-        </div>
-        <div class="space-y-2">
-          <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--museum-brown)]">Artwork detail</p>
-          <h3 class="font-display text-3xl leading-none text-[var(--museum-charcoal)]">${artwork.title}</h3>
-          <p class="text-sm leading-7 text-[var(--museum-grey)]">${artwork.artist}</p>
-        </div>
-        <p class="text-sm leading-7 text-[var(--museum-grey)]">${getPreviewText(artwork.description, 160)}</p>
-        <div class="flex items-center justify-between gap-4 border-t border-[rgba(92,64,51,0.12)] pt-4 text-sm text-[var(--museum-grey)]">
-          <span class="max-w-[14rem] truncate sm:max-w-[18rem]">${artwork.location}</span>
-          <span class="card-arrow shrink-0 font-semibold text-[var(--museum-brown)] opacity-80">Open details</span>
-        </div>
+      <img
+        src="${getArtworkImage(artwork)}"
+        alt="${getArtworkAlt(artwork)}"
+        loading="lazy"
+        decoding="async"
+        class="artwork-image ${getArtworkImageClass(artwork)}"
+      />
+    </div>
+    <div class="artwork-content">
+      <div class="artwork-meta">
+        <span class="meta-pill">${artwork.year}</span>
+        <span class="meta-pill">${artwork.medium}</span>
+      </div>
+      <div>
+        <p class="artwork-kicker">Curatorial note</p>
+        <h3 class="artwork-title">${artwork.title}</h3>
+        <p class="artwork-artist">${artwork.artist}</p>
+      </div>
+      <p class="artwork-summary">${artwork.cardSummary}</p>
+      <div class="artwork-footer">
+        <span>${getSourceLabel(artwork.references.length)}</span>
+        <span class="card-arrow">Open full record</span>
       </div>
     </div>
   `;
+
   button.addEventListener("click", () => openModal(artwork.id, button));
   article.append(button);
 
@@ -254,93 +432,101 @@ function renderGallery() {
   galleryGrid.replaceChildren(...cards);
 }
 
-function getReferenceMeta(item) {
-  if (!/^https?:\/\//i.test(item)) {
-    if (/museum/i.test(item)) {
-      return {
-        type: "Museum",
-        display: item,
-      };
-    }
+function createTimelineCard(artwork) {
+  const article = document.createElement("article");
+  article.className = "fade-up timeline-card";
 
-    if (/\(\d{4}\)/.test(item)) {
-      return {
-        type: "Book",
-        display: item,
-      };
-    }
+  const year = document.createElement("p");
+  year.className = "timeline-year";
+  year.textContent = artwork.year;
 
-    return {
-      type: "Archive",
-      display: item,
-    };
-  }
+  const title = document.createElement("h3");
+  title.className = "timeline-title";
+  title.textContent = artwork.title;
 
-  const url = new URL(item);
-  const host = url.hostname.replace(/^www\./, "");
-  const display = `${host}${url.pathname}${url.search}`.replace(/\/$/, "");
+  const theme = document.createElement("p");
+  theme.className = "timeline-theme";
+  theme.textContent = artwork.theme;
 
-  let type = "Web";
+  const note = document.createElement("p");
+  note.className = "timeline-note";
+  note.textContent = artwork.timelineNote;
 
-  if (/youtube\.com|youtu\.be/i.test(host)) {
-    type = "Video";
-  } else if (/nationalmuseum/i.test(host)) {
-    type = "Museum";
-  } else if (/ncca/i.test(host)) {
-    type = "Agency";
-  } else if (/repository|handle/i.test(display)) {
-    type = "Archive";
-  }
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "timeline-action";
+  button.textContent = "View artwork";
+  button.addEventListener("click", () => openModal(artwork.id, button));
+
+  article.append(year, title, theme, note, button);
+
+  return article;
+}
+
+function renderTimeline() {
+  const cards = [...artworks]
+    .sort((left, right) => left.sortYear - right.sortYear)
+    .map(createTimelineCard);
+  timelineGrid.replaceChildren(...cards);
+}
+
+function createResearchPartnerCard(partner) {
+  const article = document.createElement("article");
+  article.className = "fade-up partner-card";
+  article.innerHTML = `
+    <p class="card-eyebrow">${partner.role}</p>
+    <h3>${partner.name}</h3>
+    <p>${partner.description}</p>
+  `;
+
+  return article;
+}
+
+function renderResearchPartners() {
+  const cards = researchPartners.map(createResearchPartnerCard);
+  researchPillGrid.replaceChildren(...cards);
+}
+
+function getReferenceMeta(reference) {
+  const host = new URL(reference.href).hostname.replace(/^www\./, "");
 
   return {
-    type,
-    display,
+    ...reference,
     host,
-    href: item,
   };
 }
 
-function createReferenceRow(item, index) {
-  const meta = getReferenceMeta(item);
+function createReferenceRow(reference, index) {
+  const meta = getReferenceMeta(reference);
   const row = document.createElement("tr");
-  row.className = "align-top";
 
   const numberCell = document.createElement("td");
-  numberCell.className =
-    "border-t border-[rgba(92,64,51,0.12)] px-4 py-4 font-semibold text-[var(--museum-brown)]";
   numberCell.textContent = String(index + 1).padStart(2, "0");
 
   const typeCell = document.createElement("td");
-  typeCell.className = "border-t border-[rgba(92,64,51,0.12)] px-4 py-4";
-
   const typeBadge = document.createElement("span");
   typeBadge.className = "reference-type";
   typeBadge.textContent = meta.type;
   typeCell.append(typeBadge);
 
   const sourceCell = document.createElement("td");
-  sourceCell.className =
-    "border-t border-[rgba(92,64,51,0.12)] px-4 py-4 leading-7 text-[var(--museum-grey)]";
 
-  if (meta.href) {
-    const link = document.createElement("a");
-    link.href = meta.href;
-    link.target = "_blank";
-    link.rel = "noreferrer";
-    link.className = "reference-link break-all underline transition";
-    link.textContent = meta.display;
-    link.title = meta.href;
+  const link = document.createElement("a");
+  link.href = meta.href;
+  link.target = "_blank";
+  link.rel = "noreferrer";
+  link.className = "reference-link";
+  link.textContent = meta.title;
+  link.title = meta.href;
 
-    const metaLine = document.createElement("p");
-    metaLine.className =
-      "mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-[rgba(107,107,107,0.82)]";
-    metaLine.textContent = meta.host;
+  const noteLine = document.createElement("p");
+  noteLine.textContent = meta.note;
 
-    sourceCell.append(link, metaLine);
-  } else {
-    sourceCell.textContent = meta.display;
-  }
+  const hostLine = document.createElement("p");
+  hostLine.className = "card-eyebrow reference-host";
+  hostLine.textContent = meta.host;
 
+  sourceCell.append(link, noteLine, hostLine);
   row.append(numberCell, typeCell, sourceCell);
 
   return row;
@@ -348,53 +534,48 @@ function createReferenceRow(item, index) {
 
 function createReferenceTable(artwork) {
   const article = document.createElement("article");
-  article.className =
-    "fade-up museum-surface overflow-hidden rounded-[1.6rem] border border-[rgba(92,64,51,0.16)] bg-[rgba(255,255,255,0.82)] shadow-[var(--museum-shadow)]";
+  article.className = "fade-up panel reference-card";
 
   const header = document.createElement("div");
-  header.className =
-    "flex items-start justify-between gap-4 border-b border-[rgba(92,64,51,0.16)] px-6 py-5";
+  header.className = "reference-card-header";
 
-  const titleBlock = document.createElement("div");
+  const titleGroup = document.createElement("div");
+  titleGroup.className = "reference-title-group";
 
   const eyebrow = document.createElement("p");
-  eyebrow.className =
-    "text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--museum-brown)]";
+  eyebrow.className = "card-eyebrow";
   eyebrow.textContent = "Reference Table";
 
   const title = document.createElement("h3");
-  title.className =
-    "mt-3 font-display text-3xl leading-none text-[var(--museum-charcoal)]";
+  title.className = "reference-title";
   title.textContent = artwork.title;
 
   const count = document.createElement("span");
-  count.className =
-    "inline-flex shrink-0 items-center rounded-full border border-[rgba(92,64,51,0.14)] bg-white px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--museum-grey)]";
-  count.textContent = `${artwork.references.length} sources`;
+  count.className = "reference-count";
+  count.textContent = getSourceLabel(artwork.references.length);
 
-  titleBlock.append(eyebrow, title);
-  header.append(titleBlock, count);
+  titleGroup.append(eyebrow, title);
+  header.append(titleGroup, count);
 
   const tableWrap = document.createElement("div");
-  tableWrap.className = "overflow-x-auto";
+  tableWrap.className = "reference-table-wrap";
 
   const table = document.createElement("table");
-  table.className = "reference-table min-w-full border-collapse text-sm";
-
+  table.className = "reference-table";
   table.innerHTML = `
-    <thead class="bg-[rgba(92,64,51,0.08)]">
+    <thead>
       <tr>
-        <th scope="col" class="w-16 px-4 py-3 text-left text-xs font-semibold uppercase tracking-[0.18em] text-[var(--museum-brown)]">No.</th>
-        <th scope="col" class="w-28 px-4 py-3 text-left text-xs font-semibold uppercase tracking-[0.18em] text-[var(--museum-brown)]">Type</th>
-        <th scope="col" class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-[0.18em] text-[var(--museum-brown)]">Source</th>
+        <th scope="col">No.</th>
+        <th scope="col">Type</th>
+        <th scope="col">Source and use</th>
       </tr>
     </thead>
   `;
 
   const body = document.createElement("tbody");
 
-  artwork.references.forEach((item, index) => {
-    body.append(createReferenceRow(item, index));
+  artwork.references.forEach((reference, index) => {
+    body.append(createReferenceRow(reference, index));
   });
 
   table.append(body);
@@ -409,13 +590,29 @@ function renderReferences() {
   referencesGrid.replaceChildren(...tables);
 }
 
+function renderSummaryStats() {
+  const workCount = artworks.length;
+  const sourceCount = getSourceCount();
+  const institutionCount = researchPartners.length;
+  const timelineRange = getTimelineRange();
+
+  heroWorkCount.textContent = `${workCount} works`;
+  heroTimeline.textContent = timelineRange;
+  heroSourceCount.textContent = getSourceLabel(sourceCount);
+  researchWorkCount.textContent = String(workCount);
+  researchSourceCount.textContent = String(sourceCount);
+  researchInstitutionCount.textContent = String(institutionCount);
+}
+
 function populateModal(artwork) {
   modalImage.src = getArtworkImage(artwork);
   modalImage.alt = getArtworkAlt(artwork);
+  modalStage.textContent = artwork.theme;
   modalTitle.textContent = artwork.title;
   modalArtist.textContent = artwork.artist;
   modalYear.textContent = artwork.year;
   modalMedium.textContent = artwork.medium;
+  modalSourceCount.textContent = getSourceLabel(artwork.references.length);
   modalLocation.textContent = artwork.location;
   modalDimensions.textContent = artwork.dimensions;
   modalDescription.textContent = artwork.description;
@@ -423,7 +620,7 @@ function populateModal(artwork) {
   modalMeaning.textContent = artwork.meaning;
   modalContext.textContent = artwork.context;
   modalAnalysis.textContent = artwork.analysis;
-  modalInterpretation.textContent = artwork.interpretation;
+  modalCuratorNote.textContent = artwork.curatorNote;
 }
 
 function openModal(artworkId, trigger) {
@@ -473,6 +670,7 @@ function setupModalEvents() {
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && modal.classList.contains("flex")) {
       closeModal();
+      closeNavigation();
     }
   });
 }
@@ -529,44 +727,15 @@ function setupSectionTracking() {
   updateActiveLink();
 }
 
-function setupRevealAnimations() {
-  const revealElements = document.querySelectorAll(".fade-up");
-  const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
-
-  if (prefersReducedMotion) {
-    revealElements.forEach((element) => element.classList.add("is-visible"));
-    return;
-  }
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    {
-      threshold: 0.15,
-      rootMargin: "0px 0px -60px 0px",
-    }
-  );
-
-  revealElements.forEach((element, index) => {
-    element.style.transitionDelay = `${Math.min(index * 45, 240)}ms`;
-    observer.observe(element);
-  });
-}
-
 function init() {
   renderGallery();
+  renderTimeline();
+  renderResearchPartners();
   renderReferences();
+  renderSummaryStats();
+  setupNavigation();
   setupModalEvents();
   setupSectionTracking();
-  setupRevealAnimations();
 }
 
 init();
