@@ -136,6 +136,24 @@ h4,
   margin-inline: auto;
 }
 
+.header-shell > *,
+.hero-grid > *,
+.section-header-row > *,
+.statement-grid > *,
+.research-layout > *,
+.curation-grid > *,
+.analysis-grid > *,
+.timeline-grid > *,
+.partner-grid > *,
+#gallery-grid > *,
+#references-grid > *,
+.reference-card-header > *,
+.modal-layout > *,
+.modal-stat-grid > *,
+.modal-section-grid > * {
+  min-width: 0;
+}
+
 .site-header,
 main,
 .site-footer {
@@ -431,6 +449,7 @@ main,
   font-size: clamp(3.4rem, 8vw, 6.9rem);
   line-height: 0.92;
   letter-spacing: -0.04em;
+  text-wrap: balance;
 }
 
 .hero-lead {
@@ -637,6 +656,7 @@ main,
   font-size: clamp(2.4rem, 4vw, 4.4rem);
   line-height: 0.98;
   letter-spacing: -0.03em;
+  text-wrap: balance;
 }
 
 .section-title--compact {
@@ -653,6 +673,7 @@ main,
   display: inline-flex;
   align-items: center;
   gap: 0.65rem;
+  max-width: 100%;
   border-radius: 999px;
   border: 1px solid var(--line-strong);
   background: rgba(255, 255, 255, 0.8);
@@ -832,6 +853,22 @@ main,
   margin-top: 1rem;
 }
 
+.timeline-title {
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.timeline-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.timeline-action {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
 #gallery-grid {
   display: grid;
   gap: 1rem;
@@ -870,6 +907,7 @@ main,
   position: relative;
   z-index: 1;
   display: block;
+  height: 100%;
   width: 100%;
   overflow: hidden;
   border: 1px solid var(--line);
@@ -1000,6 +1038,8 @@ main,
 .artwork-content {
   display: grid;
   gap: 1rem;
+  grid-template-rows: auto auto 1fr auto;
+  height: 100%;
   padding: 1.35rem;
 }
 
@@ -1029,6 +1069,7 @@ main,
   margin-top: 0.45rem;
   font-size: clamp(2rem, 3vw, 2.8rem);
   line-height: 0.94;
+  text-wrap: balance;
 }
 
 .artwork-artist {
@@ -1079,6 +1120,7 @@ main,
   border: 1px solid var(--line);
   border-radius: 1.15rem;
   background: rgba(255, 255, 255, 0.72);
+  min-width: 0;
   padding: 1rem;
 }
 
@@ -1086,8 +1128,10 @@ main,
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.18em;
+  line-height: 1.45;
   text-transform: uppercase;
   color: var(--muted);
+  overflow-wrap: anywhere;
 }
 
 .metric-value {
@@ -1123,6 +1167,7 @@ main,
   margin-top: 0.6rem;
   font-size: clamp(2rem, 3vw, 2.75rem);
   line-height: 0.96;
+  text-wrap: balance;
 }
 
 .reference-count {
@@ -1146,8 +1191,10 @@ main,
 
 .reference-table {
   width: 100%;
+  max-width: 100%;
   border-collapse: collapse;
-  min-width: 36rem;
+  border-spacing: 0;
+  min-width: min(36rem, 100%);
 }
 
 .reference-table thead {
@@ -1376,6 +1423,7 @@ main,
 .modal-overview-title {
   font-size: clamp(2.5rem, 4.5vw, 4.4rem);
   line-height: 0.96;
+  text-wrap: balance;
 }
 
 .modal-artist {
@@ -1446,11 +1494,19 @@ main,
   #gallery-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  #gallery-grid > :last-child {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (min-width: 1180px) {
   #gallery-grid {
     grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  #gallery-grid > :last-child {
+    grid-column: span 2;
   }
 
   .gallery-span-3 {
@@ -1564,8 +1620,71 @@ main,
     grid-template-columns: 1fr;
   }
 
+  .research-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .research-metrics .metric-card:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .metric-label {
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+  }
+
+  .reference-table-wrap {
+    overflow: hidden;
+  }
+
   .reference-table {
-    min-width: 32rem;
+    min-width: 0;
+  }
+
+  .reference-table,
+  .reference-table tbody,
+  .reference-table tr,
+  .reference-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .reference-table thead {
+    display: none;
+  }
+
+  .reference-table tbody {
+    display: grid;
+    gap: 0.9rem;
+    padding: 1rem;
+  }
+
+  .reference-table tbody tr {
+    display: grid;
+    gap: 0.8rem;
+    border: 1px solid var(--line);
+    border-radius: 1.1rem;
+    background: rgba(255, 255, 255, 0.72);
+    padding: 1rem;
+  }
+
+  .reference-table tbody tr:hover {
+    background: rgba(123, 91, 70, 0.05);
+  }
+
+  .reference-table td {
+    gap: 0.35rem;
+    padding: 0;
+    border-top: 0;
+  }
+
+  .reference-table td::before {
+    content: attr(data-label);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
   }
 }
 

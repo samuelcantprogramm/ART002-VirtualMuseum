@@ -501,15 +501,18 @@ function createReferenceRow(reference, index) {
   const row = document.createElement("tr");
 
   const numberCell = document.createElement("td");
+  numberCell.dataset.label = "Entry";
   numberCell.textContent = String(index + 1).padStart(2, "0");
 
   const typeCell = document.createElement("td");
+  typeCell.dataset.label = "Type";
   const typeBadge = document.createElement("span");
   typeBadge.className = "reference-type";
   typeBadge.textContent = meta.type;
   typeCell.append(typeBadge);
 
   const sourceCell = document.createElement("td");
+  sourceCell.dataset.label = "Source and note";
 
   const link = document.createElement("a");
   link.href = meta.href;
